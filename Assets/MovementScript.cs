@@ -13,6 +13,8 @@ public class MovementScript : MonoBehaviour
     public Animator anim;
 
     public Rigidbody2D rb;
+
+    private Vector2 movement;
     
     // Start is called before the first frame update
     void Start()
@@ -21,29 +23,41 @@ public class MovementScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void Update() {
+        
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
+
+        anim.SetFloat("Horizontal", movement.x);
+        anim.SetFloat("Vertical", movement.y);
+        anim.SetFloat("Speed", movement.sqrMagnitude);
+
+    }
+
+
+    void FixedUpdate()
     {
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed* Time.deltaTime);
 
 
         if(Vector3.Distance(transform.position, movePoint.position) == 0) {
 
-            if(Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f) {
+            if(Mathf.Abs(movement.x) == 1f) {
 
-                if(!Physics2D.OverlapCircle(movePoint.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), 0.2f, obstacles)){
-                    movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
+                if(!Physics2D.OverlapCircle(movePoint.position + new Vector3(movement.x, 0f, 0f), 0.2f, obstacles)){
+                    movePoint.position += new Vector3(movement.x, 0f, 0f);
                 }
                 
-            } else if(Mathf.Abs(Input.GetAxisRaw("Vertical")) == 1f) {
+            } else if(Mathf.Abs(movement.y) == 1f) {
                 
-                if(!Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f), 0.2f, obstacles)){
-                    movePoint.position += new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f);
+                if(!Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, movement.y, 0f), 0.2f, obstacles)){
+                    movePoint.position += new Vector3(0f, movement.y, 0f);
                 }
             }
 
-            anim.SetBool("moving", false);
+            //anim.SetBool("moving", false);
         } else {
-            anim.SetBool("moving", true);
+            //anim.SetBool("moving", true);
         }
 
 
