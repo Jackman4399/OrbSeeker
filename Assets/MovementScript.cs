@@ -55,11 +55,8 @@ public class MovementScript : MonoBehaviour
                 }
             }
 
-            //anim.SetBool("moving", false);
-        } else {
-            //anim.SetBool("moving", true);
+            
         }
-
 
         
     }
