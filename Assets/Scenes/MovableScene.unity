@@ -17248,7 +17248,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.9, y: 0.9}
   m_EdgeRadius: 0
 --- !u!50 &893272422
 Rigidbody2D:
@@ -17362,6 +17362,7 @@ MonoBehaviour:
   obstacles:
     serializedVersion: 2
     m_Bits: 8
+  avatar: {fileID: 0}
 --- !u!1 &946400407
 GameObject:
   m_ObjectHideFlags: 0

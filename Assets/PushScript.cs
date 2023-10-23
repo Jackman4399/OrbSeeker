@@ -15,10 +15,14 @@ public class PushScript : MonoBehaviour
 
     public LayerMask obstacles;
 
+    public MovementScript avatar; 
+
+    private bool blocked = false;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        avatar = GameObject.FindGameObjectWithTag("Player").GetComponent<MovementScript>();
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
@@ -57,7 +61,19 @@ public class PushScript : MonoBehaviour
     }
 
     private bool checkObstacle(Vector3 vector3) {
-        return !Physics2D.OverlapCircle(movePoint.position + vector3, 0.2f, obstacles);
+        bool temp = !Physics2D.OverlapCircle(movePoint.position + vector3, 0.2f, obstacles);
+
+        if(temp) {
+            blocked = false;
+        } else {
+            blocked = true;
+        }
+
+        return temp;
+    }
+
+    public bool isBlocked(){
+        return blocked;
     }
 
 }
