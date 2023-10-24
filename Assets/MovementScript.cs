@@ -8,9 +8,8 @@ public class MovementScript : MonoBehaviour
 {
 
     public float moveSpeed = 5f;
-    public Transform movePoint;
-
     public LayerMask obstacles;
+    public LayerMask moveable;
 
     public Animator anim;
 
@@ -18,80 +17,107 @@ public class MovementScript : MonoBehaviour
 
     private Vector2 movement;
 
-    private PushScript box;
+    private bool isMoving;
     
     // Start is called before the first frame update
     void Start()
     {
-        movePoint.parent = null;
         //box = GameObject.FindGameObjectWithTag("Box").GetComponent<PushScript>();
-        box = null;
     }
 
     // Update is called once per frame
     void Update() {
         
-        if(!KeyPressed()) {
-            if (movement.y == 0) {
+        
+        if (!isMoving) {
+
+            if(movement.y == 0) {
                 movement.x = Input.GetAxisRaw("Horizontal");
             }
-            if (movement.x == 0) {
+            
+            if(movement.x == 0) {
                 movement.y = Input.GetAxisRaw("Vertical");
             }
+            
+            if (movement != Vector2.zero){
 
-            anim.SetFloat("Horizontal", movement.x);
-            anim.SetFloat("Vertical", movement.y);
-            anim.SetFloat("Speed", movement.sqrMagnitude);
+                var targetPos = transform.position;
+                targetPos.x += movement.x;
+                targetPos.y += movement.y;
+
+                Vector3 diff = targetPos - transform.position;
+
+                if (CanMove(targetPos, diff)) {
+                    StartCoroutine(Move(targetPos));
+                }
+
+            }
         }
 
-    }
-
-
-    private bool KeyPressed(){
-        bool output = Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow) 
-                    || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow);
+        anim.SetFloat("Horizontal", movement.x);
+        anim.SetFloat("Vertical", movement.y);
+        anim.SetFloat("Speed", movement.sqrMagnitude);
         
-        return output;
     }
 
-    void FixedUpdate()
-    {
-        transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed* Time.deltaTime);
 
-        if(Vector3.Distance(transform.position, movePoint.position) == 0) {
+    IEnumerator Move(Vector3 targetPos) {
 
-            if(Mathf.Abs(movement.x) == 1f) {
+        isMoving = true;
 
-                if(checkObs(new Vector3(movement.x, 0f, 0f))){
-                    movePoint.position += new Vector3(movement.x, 0f, 0f);
-                    
-                } 
-                
-            } else if(Mathf.Abs(movement.y) == 1f) {
-                
-                if(checkObs(new Vector3(0f, movement.y, 0f))){
-                    movePoint.position += new Vector3(0f, movement.y, 0f);
-               
-                }
+        while ((targetPos - transform.position).sqrMagnitude > Mathf.Epsilon){
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed* Time.deltaTime);
+            yield return null;
+        }
+        transform.position = targetPos;
+
+        isMoving = false;
+    }
+
+    private bool CanMove(Vector3 targetPos, Vector3 dir) {
+
+        if (Physics2D.OverlapCircle(targetPos, 0.2f, obstacles) != null) {
+            Debug.Log("Found Obstacle");
+            return false;
+        } else if (Physics2D.OverlapCircle(targetPos, 0.2f, moveable) != null){
+
+            Debug.Log("Found Box");
+
+            var obs = Physics2D.OverlapCircle(targetPos, 0.2f, moveable);
+            var gameObj = obs.gameObject.GetComponent<PushScript>();
+
+            Vector3 direction = Vector3.zero;
+
+            if (dir == Vector3.up) {
+
+                direction = Vector3.up;
+                Debug.Log("Checking up...");
+
+            } else if (dir == Vector3.down) {
+
+                direction = Vector3.down;
+                Debug.Log("Checking down...");
+
+            } else if (dir == Vector3.right) {
+
+                direction = Vector3.right;
+                Debug.Log("Checking right...");
+
+            } else if (dir == Vector3.left) {
+
+                direction = Vector3.left;
+                Debug.Log("Checking left...");
+
             }
 
-            
+            if (gameObj.Blocked(direction)) {
+                Debug.Log("Can't move... blocked path...");
+                return false;
+            }
+
+
         }
-        
-    }
-
-    private void OnCollisionEnter2D(Collision2D other) {
-        box = other.gameObject.GetComponent<PushScript>();
-    }   
-
-    private bool checkObs(Vector3 vector) {
-
-        bool temp = !Physics2D.OverlapCircle(movePoint.position + vector, 0.2f, obstacles);
-        bool temp1 = true;
-        if (box != null) {
-            temp1 = !box.isBlocked();
-        }
-        return temp && temp1;
+        return true;
     }
 
     
