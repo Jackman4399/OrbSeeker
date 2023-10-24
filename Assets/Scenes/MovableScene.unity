@@ -169,7 +169,7 @@ Transform:
   - {fileID: 694823512}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &489741070
+--- !u!1001 &354590386
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -177,10 +177,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4910319080921248493, guid: 607c00f2401738547b73e4a79be7fbbb, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7043131364845658282, guid: 607c00f2401738547b73e4a79be7fbbb, type: 3}
       propertyPath: moveable.m_Bits
       value: 64
@@ -225,20 +221,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7353616861029820408, guid: 607c00f2401738547b73e4a79be7fbbb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3.99
-      objectReference: {fileID: 0}
-    - target: {fileID: 7353616861029820408, guid: 607c00f2401738547b73e4a79be7fbbb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.02
-      objectReference: {fileID: 0}
     - target: {fileID: 8710435007997449230, guid: 607c00f2401738547b73e4a79be7fbbb, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8024535707694637551, guid: 607c00f2401738547b73e4a79be7fbbb, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -348,7 +335,7 @@ CompositeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
@@ -17334,7 +17321,6 @@ MonoBehaviour:
   obstacles:
     serializedVersion: 2
     m_Bits: 8
-  avatar: {fileID: 0}
 --- !u!61 &893272426
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -17364,7 +17350,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -17378,7 +17364,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9, y: 0.9}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &946400407
 GameObject:
@@ -17478,5 +17464,5 @@ SceneRoots:
   m_Roots:
   - {fileID: 946400410}
   - {fileID: 288308337}
-  - {fileID: 489741070}
   - {fileID: 893272424}
+  - {fileID: 354590386}

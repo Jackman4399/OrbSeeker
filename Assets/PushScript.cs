@@ -56,13 +56,13 @@ public class PushScript : MonoBehaviour
     //     }
     // }
 
-     private void OnCollisionEnter2D(Collision2D other) {
+     private void OnTriggerEnter2D(Collider2D other) {
         if (other.transform.tag == "Player") {
 
             if (other.transform.position.x > movePoint.position.x) {
                 
                 Vector3 move = new Vector3(-distance, 0f, 0f);
-                if (CheckObstacle(move)) {
+                if (CheckObstacle(move) && Blocked(move)) {
                     Debug.Log("1");
                     movePoint.position += move;
                 }
@@ -70,7 +70,7 @@ public class PushScript : MonoBehaviour
             } else if (other.transform.position.x < movePoint.position.x) {
 
                 Vector3 move = new Vector3(distance, 0f, 0f);
-                if (CheckObstacle(move)) {
+                if (CheckObstacle(move) && Blocked(move)) {
                     Debug.Log("2");
                     movePoint.position += move;
                 }
@@ -78,7 +78,7 @@ public class PushScript : MonoBehaviour
             } else if (other.transform.position.y < movePoint.position.y) {
 
                 Vector3 move = new Vector3(0f, distance, 0f);
-                if (CheckObstacle(move)) {
+                if (CheckObstacle(move) && Blocked(move)) {
                     Debug.Log("3");
                     movePoint.position += move;
                 }
@@ -86,7 +86,7 @@ public class PushScript : MonoBehaviour
             } else if (other.transform.position.y > movePoint.position.y) {
 
                 Vector3 move = new Vector3(0f, -distance, 0f);
-                if (CheckObstacle(move)) {
+                if (CheckObstacle(move) && Blocked(move)) {
                     Debug.Log("4");
                     movePoint.position += move;
                 }
