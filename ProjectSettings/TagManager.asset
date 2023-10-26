@@ -12,9 +12,9 @@ TagManager:
   - Obstacles
   - Water
   - UI
-  - MovableObj
+  - Boxes
   - Background
-  - 
+  - Avatar
   - 
   - 
   - 
@@ -44,4 +44,7 @@ TagManager:
     locked: 0
   - name: Background
     uniqueID: 1969073557
+    locked: 0
+  - name: Avatar
+    uniqueID: 1460296941
     locked: 0
