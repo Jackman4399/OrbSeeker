@@ -21,8 +21,10 @@ public class MovementScript : MonoBehaviour
 
     public Rigidbody2D rb;
 
+    //Used for animation and to limit player movement
     private Vector2 movement;
 
+    //A boolean that states if the player is moving or not
     private bool isMoving;
     
     // Start is called before the first frame update
@@ -34,9 +36,10 @@ public class MovementScript : MonoBehaviour
     // Update is called once per frame
     void Update() {
         
-        
+        //Player has to be idle
         if (!isMoving) {
 
+            //There two if statements limit diagonal movement
             if(movement.y == 0) {
                 movement.x = Input.GetAxisRaw("Horizontal");
             }
@@ -45,6 +48,7 @@ public class MovementScript : MonoBehaviour
                 movement.y = Input.GetAxisRaw("Vertical");
             }
             
+            //If no movement, move
             if (movement != Vector2.zero){
 
                 var targetPos = transform.position;
@@ -53,6 +57,7 @@ public class MovementScript : MonoBehaviour
 
                 Vector3 diff = targetPos - transform.position;
 
+                //Checks if player can move towards that direction
                 if (CanMove(targetPos, diff)) {
                     StartCoroutine(Move(targetPos));
                 }
@@ -60,6 +65,7 @@ public class MovementScript : MonoBehaviour
             }
         }
 
+        //used for animation
         anim.SetFloat("Horizontal", movement.x);
         anim.SetFloat("Vertical", movement.y);
         anim.SetFloat("Speed", movement.sqrMagnitude);
@@ -67,6 +73,7 @@ public class MovementScript : MonoBehaviour
     }
 
 
+    //Move method for avatar, allows smooth transition
     IEnumerator Move(Vector3 targetPos) {
 
         isMoving = true;
@@ -80,29 +87,32 @@ public class MovementScript : MonoBehaviour
         isMoving = false;
     }
 
+    //Method checking if player is able to move
     private bool CanMove(Vector3 targetPos, Vector3 dir) {
 
-        if (Physics2D.OverlapCircle(targetPos, 0.2f, obstacles) != null) {
-            Debug.Log("Found Obstacle");
-            return false;
-        } else if (Physics2D.OverlapCircle(targetPos, 0.2f, boxes) != null){
+        if (Physics2D.OverlapCircle(targetPos, 0.2f, obstacles) != null) { //Checks for immovable obstacles
 
-            Debug.Log("Found Box");
+            return false;
+
+        } else if (Physics2D.OverlapCircle(targetPos, 0.2f, boxes) != null){ //Checks for boxes
 
             var obs = Physics2D.OverlapCircle(targetPos, 0.2f, boxes);
             var gameObj = obs.gameObject.GetComponent<PushScript>();
 
-            if (gameObj.Blocked(dir)) {
-                Debug.Log("Can't move... blocked path...");
+            if (gameObj.Blocked(dir)) { // See if box's path is blocked
+
                 return false;
+
             } else {
+
                 gameObj.Move(dir);
-                Debug.Log("Moved Box: " + gameObj);
+
             }
 
-
         }
+
         return true;
+        
     }
 
     
