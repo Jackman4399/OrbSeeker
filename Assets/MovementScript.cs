@@ -7,10 +7,16 @@ using UnityEngine;
 public class MovementScript : MonoBehaviour
 {
 
+    //Movement speed of the avatar
     public float moveSpeed = 5f;
-    public LayerMask obstacles;
-    public LayerMask moveable;
 
+    //A layer mask representing the obstacles
+    public LayerMask obstacles;
+
+    //A layer mask representing the movable objects
+    public LayerMask boxes;
+
+    //Animator for the movement animations
     public Animator anim;
 
     public Rigidbody2D rb;
@@ -22,7 +28,7 @@ public class MovementScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //box = GameObject.FindGameObjectWithTag("Box").GetComponent<PushScript>();
+        
     }
 
     // Update is called once per frame
@@ -79,40 +85,19 @@ public class MovementScript : MonoBehaviour
         if (Physics2D.OverlapCircle(targetPos, 0.2f, obstacles) != null) {
             Debug.Log("Found Obstacle");
             return false;
-        } else if (Physics2D.OverlapCircle(targetPos, 0.2f, moveable) != null){
+        } else if (Physics2D.OverlapCircle(targetPos, 0.2f, boxes) != null){
 
             Debug.Log("Found Box");
 
-            var obs = Physics2D.OverlapCircle(targetPos, 0.2f, moveable);
+            var obs = Physics2D.OverlapCircle(targetPos, 0.2f, boxes);
             var gameObj = obs.gameObject.GetComponent<PushScript>();
 
-            Vector3 direction = Vector3.zero;
-
-            if (dir == Vector3.up) {
-
-                direction = Vector3.up;
-                Debug.Log("Checking up...");
-
-            } else if (dir == Vector3.down) {
-
-                direction = Vector3.down;
-                Debug.Log("Checking down...");
-
-            } else if (dir == Vector3.right) {
-
-                direction = Vector3.right;
-                Debug.Log("Checking right...");
-
-            } else if (dir == Vector3.left) {
-
-                direction = Vector3.left;
-                Debug.Log("Checking left...");
-
-            }
-
-            if (gameObj.Blocked(direction)) {
+            if (gameObj.Blocked(dir)) {
                 Debug.Log("Can't move... blocked path...");
                 return false;
+            } else {
+                gameObj.Move(dir);
+                Debug.Log("Moved Box: " + gameObj);
             }
 
 

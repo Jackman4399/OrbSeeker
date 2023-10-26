@@ -7,123 +7,34 @@ using UnityEngine.EventSystems;
 public class PushScript : MonoBehaviour
 {
 
-    public float distance = 1f;
-
+    //The transform point of the box object
     public Transform movePoint;
-
-    public Rigidbody2D rb;
-
+    
+    //The Layer mask for immovable obstacles
     public LayerMask obstacles;
 
-    //public MovementScript avatar; 
-
-    private bool isMoving;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        //avatar = GameObject.FindGameObjectWithTag("Player").GetComponent<MovementScript>();
-    }
-
-    // private void OnCollisionEnter2D(Collision2D other) {
-    //     if (other.transform.tag == "Player") {
-
-    //         //var target = movePoint.position;
-
-    //         if (other.transform.position.x > movePoint.position.x) {
-                
-    //             target += new Vector3(-distance, 0f, 0f);
-                
-    //         } else if (other.transform.position.x < movePoint.position.x) {
-
-    //             target += new Vector3(distance, 0f, 0f);
-
-    //         } else if (other.transform.position.y < movePoint.position.y) {
-
-    //             target += new Vector3(0f, distance, 0f);
-
-    //         } else if (other.transform.position.y > movePoint.position.y) {
-
-    //             target += new Vector3(0f, -distance, 0f);
-
-    //         }
-
-    //         if (Physics2D.Linecast(movePoint.position, target)) {
-    //             Debug.Log("BOX MOVE");
-    //             //Move(target);
-    //         }
-
-    //     }
-    // }
-
-     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.transform.tag == "Player") {
-
-            if (other.transform.position.x > movePoint.position.x) {
-                
-                Vector3 move = new Vector3(-distance, 0f, 0f);
-                if (CheckObstacle(move) && Blocked(move)) {
-                    Debug.Log("1");
-                    movePoint.position += move;
-                }
-                
-            } else if (other.transform.position.x < movePoint.position.x) {
-
-                Vector3 move = new Vector3(distance, 0f, 0f);
-                if (CheckObstacle(move) && Blocked(move)) {
-                    Debug.Log("2");
-                    movePoint.position += move;
-                }
-
-            } else if (other.transform.position.y < movePoint.position.y) {
-
-                Vector3 move = new Vector3(0f, distance, 0f);
-                if (CheckObstacle(move) && Blocked(move)) {
-                    Debug.Log("3");
-                    movePoint.position += move;
-                }
-
-            } else if (other.transform.position.y > movePoint.position.y) {
-
-                Vector3 move = new Vector3(0f, -distance, 0f);
-                if (CheckObstacle(move) && Blocked(move)) {
-                    Debug.Log("4");
-                    movePoint.position += move;
-                }
-            }
-
-        }
-    }
-
+    //The Layer mask for other boxes
+    public LayerMask boxes;
     
-    // IEnumerator Move(Vector3 targetPos) {
+    //A function that moves the box
+    public void Move(Vector3 targetPos) {
 
-    //     isMoving = true;
-
-    //     while ((targetPos - movePoint.position).sqrMagnitude > Mathf.Epsilon){
-    //         movePoint.position = Vector3.MoveTowards(movePoint.position, targetPos, 5f * Time.deltaTime);
-    //         yield return null;
-    //     }
-    //     movePoint.position = targetPos;
-
-    //     isMoving = false;
-    //     Debug.Log("Stopped moving box");
-    // }
-
-    private bool CheckObstacle(Vector3 target) {
-        bool temp = !Physics2D.OverlapCircle(target, 0.2f, obstacles);
-
-        return temp;
+        movePoint.position += targetPos;
     }
 
+    //Checks if an obstacle is present next to the box, will return true if there exists an obstacle.
+    private bool ObstaclePresent(Vector3 target) {
+
+        bool blocked = (Physics2D.OverlapCircle(target, 0.2f, obstacles) != null) || (Physics2D.OverlapCircle(target, 0.2f, boxes) != null);
+
+        return blocked;
+    }
+
+    //Checks if the box is blocked towards the side it's being pushed at, returns true if path is blocked.
+    //Called by player avatar.
     public bool Blocked(Vector3 direction) {
 
-        //Could possibly use Linecast for simplicity
-        RaycastHit2D hit = Physics2D.Raycast(movePoint.position, direction, distance);
-
-        Debug.Log("Looking towards: " + direction + " and " + movePoint.position);
-
-        if(hit.collider != null) {
+        if(ObstaclePresent(direction + movePoint.position)) {
             return true;
         }
 
