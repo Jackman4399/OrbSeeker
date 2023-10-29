@@ -7,10 +7,14 @@ public class CollectorScript : MonoBehaviour
     //Does the player have the orb?
     private bool orbAcquired = false;
 
+    [SerializeField] private AudioSource acquireOrb;
+
     //Collector function for the orb
     private void OnTriggerEnter2D(Collider2D collision) {
 
         if (collision.gameObject.CompareTag("Orb")){
+
+            acquireOrb.Play();
 
             Destroy(collision.gameObject);
             Debug.Log("Orb collected!");

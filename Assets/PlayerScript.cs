@@ -27,6 +27,10 @@ public class MovementScript : MonoBehaviour
 
     //A boolean that states if the player is moving or not
     private bool isMoving;
+
+    [SerializeField] private AudioSource grassWalk;
+
+    [SerializeField] private AudioSource obstacleBlock;
     
     // Start is called before the first frame update
     void Start()
@@ -51,7 +55,7 @@ public class MovementScript : MonoBehaviour
             
             //If no movement, move
             if (movement != Vector2.zero){
-
+                
                 var targetPos = transform.position;
                 targetPos.x += movement.x;
                 targetPos.y += movement.y;
@@ -61,7 +65,10 @@ public class MovementScript : MonoBehaviour
 
                 //Checks if player can move towards that direction
                 if (CanMove(targetPos, diff)) {
+                    grassWalk.Play();
                     StartCoroutine(Move(targetPos));
+                } else {
+                    obstacleBlock.Play();
                 }
 
             }
