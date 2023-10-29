@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
@@ -54,6 +55,7 @@ public class MovementScript : MonoBehaviour
                 var targetPos = transform.position;
                 targetPos.x += movement.x;
                 targetPos.y += movement.y;
+                
 
                 Vector3 diff = targetPos - transform.position;
 
@@ -82,6 +84,7 @@ public class MovementScript : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed* Time.deltaTime);
             yield return null;
         }
+
         transform.position = targetPos;
 
         isMoving = false;
