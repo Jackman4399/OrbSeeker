@@ -18,11 +18,15 @@ public class PushScript : MonoBehaviour
 
     //The Layer mask for doors
     public LayerMask door;
+
+    [SerializeField] private AudioSource shiftBox;
     
     //A function that moves the box
     public void Move(Vector3 targetPos) {
 
         movePoint.position += targetPos;
+
+        shiftBox.Play();
     }
 
     //Checks if an obstacle is present next to the box, will return true if there exists an obstacle.
