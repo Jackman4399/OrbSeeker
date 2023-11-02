@@ -16,6 +16,9 @@ public class PushScript : MonoBehaviour
     //The Layer mask for other boxes
     public LayerMask boxes;
 
+    //The Layer mask for doors
+    public LayerMask door;
+
     [SerializeField] private AudioSource shiftBox;
     
     //A function that moves the box
@@ -29,7 +32,9 @@ public class PushScript : MonoBehaviour
     //Checks if an obstacle is present next to the box, will return true if there exists an obstacle.
     private bool ObstaclePresent(Vector3 target) {
 
-        bool blocked = (Physics2D.OverlapCircle(target, 0.2f, obstacles) != null) || (Physics2D.OverlapCircle(target, 0.2f, boxes) != null);
+        bool blocked = (Physics2D.OverlapCircle(target, 0.2f, obstacles) != null) || (Physics2D.OverlapCircle(target, 0.2f, boxes) != null)
+        || (Physics2D.OverlapCircle(target, 0.2f, door) != null);
+        
 
         return blocked;
     }
