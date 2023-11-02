@@ -17,6 +17,12 @@ public class MovementScript : MonoBehaviour
     //A layer mask representing the movable objects
     public LayerMask boxes;
 
+    //A layer mask representing the locked door
+    public LayerMask lockedDoor;
+    
+    //
+    public CollectorScript collector;
+
     //Animator for the movement animations
     public Animator anim;
 
@@ -31,7 +37,7 @@ public class MovementScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        collector = GameObject.FindGameObjectWithTag("Player").GetComponent<CollectorScript>();
     }
 
     // Update is called once per frame
@@ -111,6 +117,10 @@ public class MovementScript : MonoBehaviour
                 gameObj.Move(dir);
 
             }
+
+        } else if (Physics2D.OverlapCircle(targetPos, 0.2f, lockedDoor) != null){ //Checks for locked door
+
+            return collector.HasOrb();
 
         }
 

@@ -107,7 +107,11 @@ MonoBehaviour:
     m_Bits: 8
   boxes:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
+  lockedDoor:
+    serializedVersion: 2
+    m_Bits: 2048
+  collector: {fileID: -8543196029734346268}
   anim: {fileID: 1031288592469209617}
   rb: {fileID: 0}
 --- !u!50 &3051323691636147599
