@@ -34,7 +34,7 @@ public class MovementScript : MonoBehaviour
     //A boolean that states if the player is moving or not
     private bool isMoving;
 
-    [SerializeField] private AudioSource grassWalk;
+    [SerializeField] private AudioSource walk;
 
     [SerializeField] private AudioSource obstacleBlock;
     
@@ -71,7 +71,7 @@ public class MovementScript : MonoBehaviour
 
                 //Checks if player can move towards that direction
                 if (CanMove(targetPos, diff)) {
-                    grassWalk.Play();
+                    walk.Play();
                     StartCoroutine(Move(targetPos));
                 } else {
                     obstacleBlock.Play();

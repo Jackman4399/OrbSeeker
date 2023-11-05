@@ -116,8 +116,8 @@ MonoBehaviour:
     m_Bits: 2048
   collector: {fileID: -8543196029734346268}
   anim: {fileID: 1031288592469209617}
-  rb: {fileID: 0}
-  grassWalk: {fileID: 8196717034437002808}
+  rb: {fileID: 3051323691636147599}
+  walk: {fileID: 0}
   obstacleBlock: {fileID: 2802289612673587315}
 --- !u!50 &3051323691636147599
 Rigidbody2D:
@@ -332,7 +332,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 7a9de5c4d998126449cf964a6b27a8b0, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
