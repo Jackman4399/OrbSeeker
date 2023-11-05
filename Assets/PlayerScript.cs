@@ -5,7 +5,7 @@ using System.Xml;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class MovementScript : MonoBehaviour
+public class PlayerScript : MonoBehaviour
 {
 
     //Movement speed of the avatar
@@ -34,7 +34,10 @@ public class MovementScript : MonoBehaviour
     //A boolean that states if the player is moving or not
     private bool isMoving;
 
-    [SerializeField] private AudioSource grassWalk;
+    //A boolean checking if the game is not paused
+    private bool gamePaused = false;
+
+    [SerializeField] private AudioSource walk;
 
     [SerializeField] private AudioSource obstacleBlock;
     
@@ -48,7 +51,7 @@ public class MovementScript : MonoBehaviour
     void Update() {
         
         //Player has to be idle
-        if (!isMoving) {
+        if (!isMoving && !gamePaused) {
 
             //There two if statements limit diagonal movement
             if(movement.y == 0) {
@@ -71,7 +74,7 @@ public class MovementScript : MonoBehaviour
 
                 //Checks if player can move towards that direction
                 if (CanMove(targetPos, diff)) {
-                    grassWalk.Play();
+                    walk.Play();
                     StartCoroutine(Move(targetPos));
                 } else {
                     obstacleBlock.Play();
@@ -135,5 +138,14 @@ public class MovementScript : MonoBehaviour
         
     }
 
-    
+    //Pauses game, making player unable to move
+    public void pauseGame(){
+        gamePaused = true;
+    }
+
+    //Unpauses game
+    public void unpauseGame(){
+        gamePaused = false;
+    }
+
 }
