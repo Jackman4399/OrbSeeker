@@ -13,6 +13,12 @@ public class LogicScript : MonoBehaviour
 
     public GameObject BGPlayer;
 
+    public GameObject PauseMenu;
+
+    public AudioSource pauseSound;
+
+    public AudioSource unpauseSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +35,9 @@ public class LogicScript : MonoBehaviour
                 player.unpauseGame();
                 gamePaused = false;
 
+                PauseMenu.SetActive(false);
+                unpauseSound.Play();
+
                 if(BGPlayer != null) {
                     BGPlayer.GetComponent<AudioSource>().Play();
                 }
@@ -37,6 +46,9 @@ public class LogicScript : MonoBehaviour
 
                 player.pauseGame();
                 gamePaused = true;
+
+                PauseMenu.SetActive(true);
+                pauseSound.Play();
 
                 if(BGPlayer != null) {
                     BGPlayer.GetComponent<AudioSource>().Stop();
