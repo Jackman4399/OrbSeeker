@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CollectorScript : MonoBehaviour
 {
@@ -12,15 +13,18 @@ public class CollectorScript : MonoBehaviour
     //Collector function for the orb
     private void OnTriggerEnter2D(Collider2D collision) {
 
-        if (collision.gameObject.CompareTag("Orb")){
+     if (collision.gameObject.CompareTag("RealOrb") && !orbAcquired){
 
             acquireOrb.Play();
 
             Destroy(collision.gameObject);
-            Debug.Log("Orb collected!");
 
             orbAcquired = true;
-            Debug.Log("Acquired: " + orbAcquired);
+
+        } else if (collision.gameObject.CompareTag("FakeOrb")) {
+
+            //Uncomment to reset game
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
         }
 
@@ -28,14 +32,7 @@ public class CollectorScript : MonoBehaviour
 
     //Will return true if player has the orb
     public bool HasOrb() {
-
-        if (orbAcquired) {
-
-            return true;
-
-        }
-
-        return false;
+        return orbAcquired;
     }
 
 }
