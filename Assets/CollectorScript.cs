@@ -10,6 +10,14 @@ public class CollectorScript : MonoBehaviour
 
     [SerializeField] private AudioSource acquireOrb;
 
+    [SerializeField] private AudioSource resetLevel;
+
+    public LevelLoaderScript levelLoader;
+
+    private void Start() {
+        levelLoader = GameObject.FindGameObjectWithTag("TransitionCF").GetComponent<LevelLoaderScript>();
+    }
+
     //Collector function for the orb
     private void OnTriggerEnter2D(Collider2D collision) {
 
@@ -23,9 +31,10 @@ public class CollectorScript : MonoBehaviour
 
         } else if (collision.gameObject.CompareTag("FakeOrb")) {
 
-            //Uncomment to reset game
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            resetLevel.Play();
 
+            levelLoader.LoadNextScene(SceneManager.GetActiveScene().buildIndex);
+            
         }
 
     }

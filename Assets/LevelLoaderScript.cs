@@ -11,8 +11,10 @@ public class LevelLoaderScript : MonoBehaviour
 
     public GameObject canvas;
 
-    public void LoadNextScene(int index){
+    public void LoadNextScene(int index) {
+
         StartCoroutine(LoadLevel(index));
+        
     }
 
     IEnumerator LoadLevel(int levelIndex) {
