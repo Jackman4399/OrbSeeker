@@ -6,9 +6,15 @@ using UnityEngine.SceneManagement;
 public class StartScript : MonoBehaviour
 {
 
+    public LevelLoaderScript levelLoader;
+
+    private void Start() {
+        levelLoader = GameObject.FindGameObjectWithTag("TransitionCF").GetComponent<LevelLoaderScript>();
+    }
+
     public void StartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        levelLoader.LoadNextScene(4);
     }
 
 }

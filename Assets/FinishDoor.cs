@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class FinishDoor : MonoBehaviour
 {
-    // Start is called before the first frame update
-    private void Start()
-    {
-        
+    public LevelLoaderScript levelLoader;
+
+    private void Start() {
+        levelLoader = GameObject.FindGameObjectWithTag("TransitionCF").GetComponent<LevelLoaderScript>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -19,6 +19,6 @@ public class FinishDoor : MonoBehaviour
     }
 
     public void CompleteLevel(){
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        levelLoader.LoadNextScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }   

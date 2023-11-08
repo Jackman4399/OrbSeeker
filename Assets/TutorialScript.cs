@@ -5,13 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class TutorialScript : MonoBehaviour
 {
-    public class StartScript : MonoBehaviour
-{
+
+    public LevelLoaderScript levelLoader;
+
+    private void Start() {
+        levelLoader = GameObject.FindGameObjectWithTag("TransitionCF").GetComponent<LevelLoaderScript>();
+    }
 
     public void StartTutorial()
     {
-        SceneManager.LoadScene(1);
+        levelLoader.LoadNextScene(1);
     }
 
-}
 }

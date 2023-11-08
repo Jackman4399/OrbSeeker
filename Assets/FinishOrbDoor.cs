@@ -5,11 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class FinishOrbDoor : MonoBehaviour
 {   
+    public LevelLoaderScript levelLoader;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    private void Start() {
+        levelLoader = GameObject.FindGameObjectWithTag("TransitionCF").GetComponent<LevelLoaderScript>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {    
@@ -22,7 +21,7 @@ public class FinishOrbDoor : MonoBehaviour
     }
 
     public void CompleteLevel(){
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        levelLoader.LoadNextScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
 }
