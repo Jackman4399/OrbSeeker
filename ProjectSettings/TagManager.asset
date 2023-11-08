@@ -8,6 +8,7 @@ TagManager:
   - Orb
   - RealOrb
   - FakeOrb
+  - TransitionCF
   layers:
   - Default
   - TransparentFX
@@ -53,4 +54,7 @@ TagManager:
     locked: 0
   - name: Items
     uniqueID: 2861193105
+    locked: 0
+  - name: Transition
+    uniqueID: 1546684715
     locked: 0
