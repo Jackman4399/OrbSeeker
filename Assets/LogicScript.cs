@@ -42,7 +42,7 @@ public class LogicScript : MonoBehaviour
                 }
 
             } else {
-
+                
                 player.pauseGame();
                 gamePaused = true;
 
