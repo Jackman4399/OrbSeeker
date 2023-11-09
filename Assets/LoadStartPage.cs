@@ -14,8 +14,6 @@ public class LoadStartPage : MonoBehaviour
 
     public void GoToMain(){
 
-        Debug.Log("Going to main");
-
         levelLoader.LoadNextScene(0);
 
     }
