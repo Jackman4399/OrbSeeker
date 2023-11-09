@@ -31,8 +31,6 @@ public class LogicScript : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape)) {
             if (gamePaused) {
 
-                Debug.Log("Game Unpaused");
-
                 player.unpauseGame();
                 gamePaused = false;
 
@@ -45,7 +43,6 @@ public class LogicScript : MonoBehaviour
 
             } else {
                 
-                Debug.Log("Game Paused");
                 player.pauseGame();
                 gamePaused = true;
 
