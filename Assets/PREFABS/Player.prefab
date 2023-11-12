@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7128768562737562736}
   - component: {fileID: 2167934793797896733}
   - component: {fileID: 7043131364845658282}
-  - component: {fileID: 3051323691636147599}
   - component: {fileID: 1031288592469209617}
   - component: {fileID: -4692787588923523638}
   - component: {fileID: -8543196029734346268}
@@ -117,36 +116,8 @@ MonoBehaviour:
     m_Bits: 2048
   collector: {fileID: -8543196029734346268}
   anim: {fileID: 1031288592469209617}
-  rb: {fileID: 3051323691636147599}
   walk: {fileID: 8196717034437002808}
   obstacleBlock: {fileID: 2802289612673587315}
---- !u!50 &3051323691636147599
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8710435007997449230}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!95 &1031288592469209617
 Animator:
   serializedVersion: 5
@@ -227,6 +198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acquireOrb: {fileID: 4456127743875716238}
   resetLevel: {fileID: 3039049588696024414}
+  levelLoader: {fileID: 0}
 --- !u!82 &8196717034437002808
 AudioSource:
   m_ObjectHideFlags: 0
