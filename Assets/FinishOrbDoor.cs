@@ -14,7 +14,12 @@ public class FinishOrbDoor : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision) {    
         
         if (collision.gameObject.name == "Player" && collision.gameObject.GetComponent<CollectorScript>().HasOrb()){
-            Invoke("CompleteLevel", 0.5f);
+            if ((SceneManager.GetActiveScene().buildIndex != 3) && (SceneManager.GetActiveScene().buildIndex != 5)){
+                Invoke("CompleteLevel", 0.5f);
+            } else {
+                levelLoader.LoadNextScene(0);
+            }
+            
         } else {
             Debug.Log("No orb has been collected.");
         }

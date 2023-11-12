@@ -584,7 +584,7 @@ GameObject:
   - component: {fileID: 254523121}
   - component: {fileID: 254523120}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: xt (TMP)P)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -629,7 +629,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Game Title
+  m_text: OrbSeeker
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b955d806b14609d4bbc55557c3b991ae, type: 2}
   m_sharedMaterial: {fileID: 6693738437753098858, guid: b955d806b14609d4bbc55557c3b991ae, type: 2}
@@ -656,8 +656,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1686,7 +1686,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2345295251255459437, guid: 5cbcbaf10cf66454bb806fdd8f398e8a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4897562670981222746, guid: 5cbcbaf10cf66454bb806fdd8f398e8a, type: 3}
       propertyPath: m_LocalPosition.x
