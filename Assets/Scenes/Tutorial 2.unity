@@ -449,6 +449,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 7043131364845658282, guid: 607c00f2401738547b73e4a79be7fbbb, type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7043131364845658282, guid: 607c00f2401738547b73e4a79be7fbbb, type: 3}
       propertyPath: walk
       value: 
       objectReference: {fileID: 1166245631}
@@ -500,7 +504,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7128768562737562736, guid: 607c00f2401738547b73e4a79be7fbbb, type: 3}

@@ -20,13 +20,11 @@ public class PlayerScript : MonoBehaviour
     //A layer mask representing the locked door
     public LayerMask lockedDoor;
     
-    //
+    // Script for interacting with collectible objects
     public CollectorScript collector;
 
     //Animator for the movement animations
     public Animator anim;
-
-    public Rigidbody2D rb;
 
     //Used for animation and to limit player movement
     private Vector2 movement;
